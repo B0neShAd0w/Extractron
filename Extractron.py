@@ -51,7 +51,7 @@ if __name__ == "__main__":
     parser.add_argument("--quantity", action="store_true", help="Extract QUANTITY entities, such as measurements, as of weight or distance.")
     parser.add_argument("--product", action="store_true", help="Extract PRODUCT entities, such as objects, vehicles, foods, etc. (Not included in all models)")
     parser.add_argument("--event", action="store_true", help="Extract EVENT entities, such as Named hurricanes, battles, wars, sports events, etc. (Not included in all models)")
-    parser.add_argument("--model", choices=["small", "medium", "large", "transformer"], help="Spacy model to use, default: transformer")
+    parser.add_argument("--model", required=True, help="Spacy model to use")
     parser.add_argument("--output", help="Output file path")
     args = parser.parse_args()
 
@@ -86,15 +86,7 @@ if __name__ == "__main__":
     if args.event:
         entity_types.append("EVENT")
 
-    model = ""
-    if args.model == "small":
-        model = "en_core_web_sm"
-    elif args.model == "medium":
-        model = "en_core_web_md"
-    elif args.model == "large":
-        model = "en_core_web_lg"
-    elif args.model == "transformer":
-        model = "en_core_web_trf"
+    model = args.model
 
     if not check_spacy_model(model):
         print(f"{Fore.RED}[-] Spacy model '{model}' is not installed. Please install it by running: python -m spacy download {model}\n")
@@ -105,7 +97,7 @@ if __name__ == "__main__":
         sys.exit(1)
 
     print(f'Please be patient while entities are extracted...\n')
-    
+
     entities = set()
     for entity_type in entity_types:
         entities.update(extract_entities(input_data, input_type, [entity_type], model))
