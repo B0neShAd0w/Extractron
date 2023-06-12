@@ -28,13 +28,45 @@ python3 -m spacy download en_core_web_trf
 
 ## Usage
 
-#### Load a dataset and perform an Entity Extraction
+#### Load the test_dataset and perform an Entity Extraction using the 'small' spaCy model, against the 'PERSON' entity
 ```python
-# This will outfile a file using the name as the input file (auto appended with .kml)
-python3 Extractron.py --input test_dataset.txt
+python3 Extractron.py --input test_dataset.txt --model small --person
 ```
-#### Load the outputted KML file into Google Earth Pro/Google Maps etc.
 
+#### Load the test_dataset and perform an Entity Extraction using the 'transformer' spaCy model, against the 'GEOPOLITICAL' entity
+```python
+python3 Extractron.py --input test_dataset.txt --model small --gpe
+```
+
+#### Load the test_dataset and perform an Entity Extraction using the 'medium' spaCy model, against the 'EVENT' entity, and output to 'results.txt'
+```python
+python3 Extractron.py --input test_dataset.txt --model medium --event --output results.txt
+```
+
+#### Available entities
+| Parameter | Description |
+|---------|-----------|
+| --person | Extract PERSON entities, including fictional characters and groups of people. |
+| --gpe | Extract GEOPOLITICAL entities, such as countries, cities, and states. |
+| --loc | Extract NON-GPE locations, such as mountains, bodies of water, and parks. |
+| --org | Extract ORGANIZATIONS entities, such as companies, institutions, and agencies. |
+| --date | Extract DATE entities, absolute or relative dates or periods. |
+| --time | Extract TIME entities, including specific times of day or durations. |
+| --money | Extract MONEY entities, monetary values, including currency symbols. |
+| --percent | Extract PERCENT entities, including percentage symbol. |
+| --cardinal | Extract CARDINAL entities, such as numerals that do not fall under another type. |
+| --ordinal | Extract ORDINAL entities, such as 'first', 'second', etc. |
+| --quantity | Extract QUANTITY entities, such as measurements, as of weight or distance. |
+| --product | Extract PRODUCT entities, such as objects, vehicles, foods, etc. (Not included in all models |
+| --event | Extract EVENT entities, such as Named hurricanes, battles, wars, sports events, etc. (Not included in all models |
+
+#### Available spaCy models
+| Parameter | Value | spaCy Model name |
+|---------|-----|----------------|
+| --model | small | en_core_web_sm |
+| --model | medium | en_core_web_md |
+| --model | large | en_core_web_lg |
+| --model | transformer | en_core_web_transformer |
 
 ## Planned features
 
