@@ -87,6 +87,14 @@ if __name__ == "__main__":
         entity_types.append("EVENT")
 
     model = args.model
+    if args.model == "small":
+        model = "en_core_web_sm"
+    elif args.model == "medium":
+        model = "en_core_web_md"
+    elif args.model == "large":
+        model = "en_core_web_lg"
+    elif args.model == "transformer":
+        model = "en_core_web_trf"
 
     if not check_spacy_model(model):
         print(f"{Fore.RED}[-] Spacy model '{model}' is not installed. Please install it by running: python -m spacy download {model}\n")
