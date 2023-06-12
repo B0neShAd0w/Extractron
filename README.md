@@ -1,7 +1,7 @@
 # Extractron
 
 Extractron is a Python script that performs Entity Extraction using the spaCy Natural Language Processing model(s).\
-This has purely been created for use with CTF's.
+This has purely been created for use for CTF's.
 
 
 
